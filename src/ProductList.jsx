@@ -1,5 +1,10 @@
 /* eslint-disable react/prop-types */
-const ProductList = ({ products, setCart }) => {
+import { useCartStore } from "./store/cart-store";
+
+const ProductList = ({ products }) => {
+  const addToCart = useCartStore((state) => state.addToCart);
+  console.log('addToCart:', typeof addToCart)
+
   return (
     <div className="my-5">
       {products?.map((product) => (
@@ -10,7 +15,7 @@ const ProductList = ({ products, setCart }) => {
           <h3 className="mt-10 font-semibold">{product.name}</h3>
           <p>{product.description}</p>
           <button
-            onClick={() => setCart((cart) => [...cart, product])}
+            onClick={() => addToCart(product)}
             className="border border-black bg-slate-300 px-1"
           >
             Add to Cart
